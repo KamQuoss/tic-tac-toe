@@ -17,6 +17,7 @@ body {
     justify-items: center;
     margin-top: 1rem;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .box {
