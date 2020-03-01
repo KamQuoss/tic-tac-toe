@@ -1,11 +1,24 @@
 @import url('https://fonts.googleapis.com/css?family=Indie+Flower&display=swap');
 
 body {
-    display: flex;
-    justify-content: center;
     background: #353839;
     font-family: 'Indie Flower';
     font-size: 3rem;
+}
+
+.title {
+    color: #eaebeb;
+    text-align: center;
+}
+.alert-container{
+    color: #eaebeb;
+    text-align: center;
+    font-size: 1.6rem;
+}
+
+.board {
+    display: flex;
+    justify-content: center;
 }
 
 .board-container {

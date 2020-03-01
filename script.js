@@ -24,6 +24,23 @@ let playerX = 'x',
 
 // adding boxes to board
 const board = document.querySelectorAll('.box');
+
+// comunication
+let alert = document.querySelector('.alert-container');
+const writeTurn = (turn) => {
+    let whosTurn = `Postaw ${turn}`;
+    alert.innerHTML = whosTurn;
+};
+const whoWins = (turn) => {
+    if (!turn) alert.innerHTML = 'Remis';
+    else {
+        let winner = `Wygrywa ${turn}`;
+        alert.innerHTML = winner;
+    }
+};
+
+writeTurn(playerO);
+
 // clearing board
 const cleanBoard = () => {
     board.forEach(box => box.innerText = '');
@@ -31,6 +48,7 @@ const cleanBoard = () => {
     tableO = [];
     result = false;
     round = 1;
+    writeTurn(playerO);
     board.forEach(box => box.addEventListener('click', addSign));
 }
 // adding move to table of moves
@@ -39,7 +57,7 @@ const addMove = (move, table) => table.push(move);
 const checkWinner = (tablePlayer) => {
     wininning.forEach(combination => {
         if (result == true) return;
-        result = combination.every(comb => tablePlayer.includes(comb));        
+        result = combination.every(comb => tablePlayer.includes(comb));
     })
 }
 
@@ -55,25 +73,31 @@ const addSign = event => {
             event.target.innerText = playerX;
             addMove(coordinate, tableX);
             checkWinner(tableX);
+            writeTurn(playerO);
             if (result == true) {
+                whoWins(playerX);
+                console.log(`wygrywa ${playerX}`)
                 //block clicking boxes
                 board.forEach(box => box.removeEventListener('click', addSign));
-                setTimeout(cleanBoard, 1000)
+                setTimeout(cleanBoard, 2000)
             };
         } else {
             event.target.innerText = playerO;
             addMove(coordinate, tableO);
             checkWinner(tableO);
+            writeTurn(playerX);
             if (result == true) {
+                whoWins(playerO);
                 //block clicking boxes
                 board.forEach(box => box.removeEventListener('click', addSign));
-                setTimeout(cleanBoard, 1000)
+                setTimeout(cleanBoard, 2000)
             };
         };
         // case remis
         if (round == 9 && result == false) {
+            whoWins();
             board.forEach(box => box.removeEventListener('click', addSign));
-            setTimeout(cleanBoard, 1000)
+            setTimeout(cleanBoard, 2000)
         }
         //another round        
         round++;
